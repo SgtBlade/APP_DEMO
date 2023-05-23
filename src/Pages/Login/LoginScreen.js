@@ -49,7 +49,7 @@ const LoginScreen = ({ onLogin, initialError }) => {
     <Container>
       <Title>Inloggen</Title>
       <form onSubmit={handleSubmit}>
-        {error || initialError && <p className={style.error}>{initialError ?? error}</p>}
+        {error || initialError ? <p className={style.error}>{initialError ?? error}</p> : ''}
         <label htmlFor="username">Username</label>
         <Input name="username" value={data.username} onChange={handleChange} />
         <label htmlFor="password">Password</label>
