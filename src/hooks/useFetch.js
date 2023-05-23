@@ -10,9 +10,6 @@ const useFetch = (path) => {
   // Get the currently logged-in user from the authentication context
   const { user, logout, setGlobalError } = useAuthContext();
 
-  // Extract the user ID from the user object
-  const userId = user._id;
-
   // Define a function to fetch the data from the server
   const fetchData = useCallback(() => {
     // Create a variable to keep track of whether the component is still mounted
@@ -42,7 +39,7 @@ const useFetch = (path) => {
 
     // Return a cleanup function that sets isCurrent to false when the component is unmounted
     return () => (isCurrent = false);
-  }, [path, userId]);
+  }, [path, logout, setGlobalError, user.token]);
  
   // Call the fetchData function when the component mounts or when path or userId change
   useEffect(() => {
