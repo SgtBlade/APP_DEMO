@@ -26,6 +26,9 @@ const useFetch = (path) => {
       .then((data) => isCurrent && setData(data))
       // If there is an error, set the error state variable
       .catch(async (error) => {
+        console.log(error)
+        try{
+          
         const errormessage = await error.json()
         .then(response => response.error ?? String(error))
         .then(response => {if(response === "Token expired")
@@ -33,8 +36,14 @@ const useFetch = (path) => {
           setGlobalError("Token expired");
           logout();
         }
+        
         } )
+
         isCurrent && setError(errormessage)
+        }
+        catch(ex) {
+          console.log(ex)
+        }
       });
 
     // Return a cleanup function that sets isCurrent to false when the component is unmounted
